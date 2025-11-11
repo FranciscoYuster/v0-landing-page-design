@@ -39,26 +39,144 @@ export async function POST(req: NextRequest) {
 
     const problemasText = Array.isArray(formData.problemas) ? formData.problemas.join(", ") : String(formData.problemas || "No proporcionado")
 
-    // Build HTML for admin notification
+    // Build HTML for admin notification with proper structure and inline styles
     const adminHtml = `
-      <h2>Nuevo cliente</h2>
-      <p><strong>Nombre:</strong> ${formData.nombre}</p>
-      <p><strong>RUT:</strong> ${formData.rut || "No proporcionado"}</p>
-      <p><strong>Email:</strong> ${formData.email}</p>
-      <p><strong>Teléfono:</strong> ${formData.telefono || "No proporcionado"}</p>
-      <p><strong>Empresa:</strong> ${formData.empresa || "No proporcionado"}</p>
-      <p><strong>Colaboradores:</strong> ${formData.colaboradores}</p>
-      <p><strong>Problemas:</strong> ${problemasText}</p>
-      <p><strong>Otro problema:</strong> ${formData.otroProblema || "No proporcionado"}</p>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nuevo Cliente</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #f4f4f4;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f4f4f4; padding: 20px;">
+    <tr>
+      <td align="center">
+        <table width="600" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+          <tr>
+            <td style="background-color: #0f1f2e; padding: 30px; text-align: center;">
+              <h1 style="color: #e8d4b0; margin: 0; font-size: 28px;">🎉 Nuevo Cliente</h1>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 30px;">
+              <table width="100%" cellpadding="8" cellspacing="0">
+                <tr>
+                  <td style="padding: 10px 0; border-bottom: 1px solid #e0e0e0;">
+                    <strong style="color: #0f1f2e;">Nombre:</strong>
+                    <span style="color: #333; margin-left: 10px;">${formData.nombre}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 10px 0; border-bottom: 1px solid #e0e0e0;">
+                    <strong style="color: #0f1f2e;">RUT:</strong>
+                    <span style="color: #333; margin-left: 10px;">${formData.rut || "No proporcionado"}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 10px 0; border-bottom: 1px solid #e0e0e0;">
+                    <strong style="color: #0f1f2e;">Email:</strong>
+                    <span style="color: #333; margin-left: 10px;"><a href="mailto:${formData.email}" style="color: #007bff; text-decoration: none;">${formData.email}</a></span>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 10px 0; border-bottom: 1px solid #e0e0e0;">
+                    <strong style="color: #0f1f2e;">Teléfono:</strong>
+                    <span style="color: #333; margin-left: 10px;">${formData.telefono || "No proporcionado"}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 10px 0; border-bottom: 1px solid #e0e0e0;">
+                    <strong style="color: #0f1f2e;">Empresa:</strong>
+                    <span style="color: #333; margin-left: 10px;">${formData.empresa || "No proporcionado"}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 10px 0; border-bottom: 1px solid #e0e0e0;">
+                    <strong style="color: #0f1f2e;">Colaboradores:</strong>
+                    <span style="color: #333; margin-left: 10px;">${formData.colaboradores}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 10px 0; border-bottom: 1px solid #e0e0e0;">
+                    <strong style="color: #0f1f2e;">Problemas:</strong>
+                    <span style="color: #333; margin-left: 10px;">${problemasText}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 10px 0;">
+                    <strong style="color: #0f1f2e;">Otro problema:</strong>
+                    <span style="color: #333; margin-left: 10px;">${formData.otroProblema || "No proporcionado"}</span>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td style="background-color: #f9f9f9; padding: 20px; text-align: center; font-size: 14px; color: #666;">
+              <p style="margin: 0;">Scale BI Consulting - Notificación automática</p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
     `
 
-    // Build HTML for customer confirmation
+    // Build HTML for customer confirmation with proper structure and inline styles
     const customerHtml = `
-      <h2>Solicitud recibida</h2>
-      <p>Hola ${formData.nombre},</p>
-      <p>Hemos recibido tu solicitud de consultoría. Nuestro equipo se pondrá en contacto contigo en las próximas 48 horas.</p>
-      <p><strong>Empresa:</strong> ${formData.empresa || "No proporcionado"}</p>
-      <p>Si necesitas contactarnos antes, responde a este correo.</p>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solicitud Recibida</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #f4f4f4;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f4f4f4; padding: 20px;">
+    <tr>
+      <td align="center">
+        <table width="600" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+          <tr>
+            <td style="background-color: #0f1f2e; padding: 30px; text-align: center;">
+              <h1 style="color: #e8d4b0; margin: 0; font-size: 28px;">✅ Solicitud Recibida</h1>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 30px;">
+              <h2 style="color: #0f1f2e; margin-top: 0;">Hola ${formData.nombre},</h2>
+              <p style="color: #333; font-size: 16px; line-height: 1.6;">
+                ¡Gracias por contactarnos! Hemos recibido tu solicitud de consultoría.
+              </p>
+              <p style="color: #333; font-size: 16px; line-height: 1.6;">
+                Nuestro equipo revisará tu información y se pondrá en contacto contigo en las próximas <strong>48 horas</strong>.
+              </p>
+              <div style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                <p style="margin: 0; color: #666; font-size: 14px;"><strong>Empresa:</strong> ${formData.empresa || "No proporcionado"}</p>
+              </div>
+              <p style="color: #333; font-size: 16px; line-height: 1.6;">
+                Si necesitas contactarnos antes o tienes alguna pregunta, no dudes en responder a este correo.
+              </p>
+              <p style="color: #333; font-size: 16px; line-height: 1.6;">
+                Saludos cordiales,<br>
+                <strong>Equipo Scale BI Consulting</strong>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td style="background-color: #f9f9f9; padding: 20px; text-align: center; font-size: 14px; color: #666;">
+              <p style="margin: 0;">Scale BI Consulting</p>
+              <p style="margin: 5px 0 0 0;">Transformando datos en decisiones</p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
     `
 
     // Create SDK client
