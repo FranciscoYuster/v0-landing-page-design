@@ -74,6 +74,13 @@ const services = [
 ]
 
 export default function Services() {
+  const handleCtaClick = () => {
+    const formSection = document.getElementById("consultation-form")
+    if (formSection) {
+      formSection.scrollIntoView({ behavior: "smooth" })
+    }
+  }
+
   return (
     <section id="servicios" className="py-20 px-4 sm:px-6 lg:px-8 bg-[#0f1f2e]">
       <div className="max-w-6xl mx-auto">
@@ -103,7 +110,10 @@ export default function Services() {
                 ))}
               </ul>
 
-              <button className="w-full py-3 bg-[#1a2e3e] border-2 border-[#e8d4b0] text-[#e8d4b0] font-semibold rounded-lg hover:bg-[#e8d4b0]/10 transition-colors">
+              <button
+                onClick={handleCtaClick}
+                className="w-full py-3 bg-[#1a2e3e] border-2 border-[#e8d4b0] text-[#e8d4b0] font-semibold rounded-lg hover:bg-[#e8d4b0]/10 transition-colors"
+              >
                 {service.cta}
               </button>
             </div>
