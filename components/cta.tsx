@@ -11,13 +11,10 @@ export default function CTA() {
               Agenda una consultoría gratuita con nuestro equipo y descubre cómo podemos ayudarte
             </p>
           </div>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 pt-8 justify-center">
             <a
-              href="https://calendly.com/tulink"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-10 py-4 bg-[#e8d4b0] text-[#1a2e3e] font-bold rounded-lg hover:bg-[#f5deb3] transition-colors text-lg"
+              href="#consultation-form"
+              className="px-8 py-4 bg-[#e8d4b0] text-[#1a2e3e] font-semibold rounded-lg hover:bg-[#f5deb3] transition-colors text-center"
             >
               Agenda tu Consultoría Gratuita
             </a>
