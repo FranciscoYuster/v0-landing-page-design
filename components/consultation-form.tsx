@@ -95,7 +95,13 @@ export default function ConsultationForm() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          name: formData.nombre,
+          phone: formData.telefono,
+          email: formData.email,
+          company: formData.empresa,
+          employees: formData.colaboradores,
+        }),
       })
 
       console.log("[v0] Response status:", response.status)
