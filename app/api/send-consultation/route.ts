@@ -101,12 +101,30 @@ export async function POST(request: Request) {
         : '';
       
       const problemsSection = problemsList 
-        ? `<strong>Problemas identificados:</strong><ul>${problemsList}</ul>` 
+        ? `<strong>Problemas identificados:</strong><br><ul>${problemsList}</ul>` 
         : '';
       
-      const otherProblemSection = otherProblem 
+      const otherProblemSection = otherProblem && otherProblem.trim()
         ? `<strong>Otro problema:</strong> ${otherProblem}<br>` 
         : '';
+
+      // Construir la descripción completa
+      let description = `<strong>Empresa:</strong> ${company}<br>
+<strong>Número de colaboradores:</strong> ${employees}<br>
+<strong>Teléfono:</strong> ${phone}<br>
+<strong>Email:</strong> ${email}<br>`;
+
+      if (rut && rut.trim()) {
+        description += `<strong>RUT:</strong> ${rut}<br>`;
+      }
+
+      if (problemsSection) {
+        description += `<br>${problemsSection}`;
+      }
+
+      if (otherProblemSection) {
+        description += `<br>${otherProblemSection}`;
+      }
 
       const ticketId = await new Promise<number>((resolve, reject) => {
         modelsClient.methodCall('execute_kw', [
@@ -123,18 +141,10 @@ export async function POST(request: Request) {
             partner_phone: phone,
             x_company: company,
             x_employees: employees,
-            x_rut: rut,
+            x_rut: rut || '',
             x_problems: problems && problems.length > 0 ? problems.join(', ') : '',
-            x_other_problem: otherProblem,
-            description: `
-                <strong>Empresa:</strong> ${company}<br>
-                <strong>Número de colaboradores:</strong> ${employees}<br>
-                <strong>Teléfono:</strong> ${phone}<br>
-                <strong>Email:</strong> ${email}<br>
-                ${rut ? `<strong>RUT:</strong> ${rut}<br>` : ''}
-                ${problemsSection}
-                ${otherProblemSection}
-                `,
+            x_other_problem: otherProblem || '',
+            description: description,
             team_id: 1,
             priority: '1'
           }]
