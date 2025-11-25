@@ -101,6 +101,9 @@ export default function ConsultationForm() {
           email: formData.email,
           company: formData.empresa,
           employees: formData.colaboradores,
+          rut: formData.rut,
+          problems: formData.problemas,
+          otherProblem: formData.otroProblema,
         }),
       })
 
